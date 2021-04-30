@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "artifacts" {
 }
 
 data "archive_file" "placeholder" {
-  output_path = "${path.cwd}/placeholder.zip"
+  output_path = "placeholder.zip"
   type        = "zip"
 
   source {
@@ -50,7 +50,7 @@ resource "aws_s3_bucket_object" "placeholder" {
   bucket = aws_s3_bucket.artifacts.bucket
   key    = "placeholder.zip"
   source = data.archive_file.placeholder.output_path
-  etag   = filemd5(data.archive_file.placeholder.output_path)
+  etag   = data.archive_file.placeholder.output_md5
 
   lifecycle { ignore_changes = [etag] }
 }
