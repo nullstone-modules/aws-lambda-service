@@ -1,3 +1,9 @@
+locals {
+  env_vars = merge(var.service_env_vars, {
+    "NULLSTONE" = "true"
+  })
+}
+
 resource "aws_lambda_function" "this" {
   function_name = data.ns_workspace.this.hyphenated_name
   handler       = var.service_handler
@@ -6,8 +12,8 @@ resource "aws_lambda_function" "this" {
   memory_size   = var.service_memory
   timeout       = var.service_timeout
   tags          = data.ns_workspace.this.tags
-  s3_bucket     = aws_s3_bucket.artifacts.arn
-  s3_key        = "service-${local.app_version}.zip"
+  s3_bucket     = aws_s3_bucket.artifacts.bucket
+  s3_key        = local.has_artifact ? local.artifact_key : aws_s3_bucket_object.placeholder.key
 
   dynamic "vpc_config" {
     for_each = local.vpc_configs
@@ -19,6 +25,6 @@ resource "aws_lambda_function" "this" {
   }
 
   environment {
-    variables = var.service_env_vars
+    variables = local.env_vars
   }
 }
