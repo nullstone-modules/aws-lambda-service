@@ -1,3 +1,9 @@
+locals {
+  env_vars = merge(var.service_env_vars, {
+    "NULLSTONE" = "true"
+  })
+}
+
 resource "aws_lambda_function" "this" {
   function_name = data.ns_workspace.this.hyphenated_name
   handler       = var.service_handler
@@ -19,6 +25,6 @@ resource "aws_lambda_function" "this" {
   }
 
   environment {
-    variables = var.service_env_vars
+    variables = local.env_vars
   }
 }
