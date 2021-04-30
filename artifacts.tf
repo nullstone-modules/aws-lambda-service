@@ -21,13 +21,13 @@ resource "aws_s3_bucket" "artifacts" {
   }
 }
 
-data "archive_file" "empty" {
-  output_path = "placeholder.zip"
+data "archive_file" "placeholder" {
+  output_path = "${path.cwd}/placeholder.zip"
   type        = "zip"
 
   source {
     filename = "index.js"
-    content = <<EOF
+    content  = <<EOF
 exports.handler = async (event) => {
   console.log("Hello world");
 };
@@ -49,8 +49,8 @@ locals {
 resource "aws_s3_bucket_object" "placeholder" {
   bucket = aws_s3_bucket.artifacts.bucket
   key    = "placeholder.zip"
-  source = data.archive_file.empty.output_path
-  etag   = filemd5(data.archive_file.empty.output_path)
+  source = data.archive_file.placeholder.output_path
+  etag   = filemd5(data.archive_file.placeholder.output_path)
 
-  lifecycle { ignore_changes = [ etag ] }
+  lifecycle { ignore_changes = [etag] }
 }
