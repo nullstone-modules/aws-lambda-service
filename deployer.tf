@@ -18,16 +18,19 @@ data "aws_iam_policy_document" "deployer" {
   statement {
     sid    = "AllowFindBucket"
     effect = "Allow"
+
     actions = [
       "s3:ListBucket",
       "s3:GetBucketLocation"
     ]
+
     resources = ["arn:aws:s3:::${local.artifacts_bucket_name}"]
   }
 
   statement {
     sid    = "AllowEditObjects"
     effect = "Allow"
+
     actions = [
       "s3:PutObject",
       "s3:GetObject",
@@ -35,5 +38,17 @@ data "aws_iam_policy_document" "deployer" {
     ]
 
     resources = ["arn:aws:s3:::${local.artifacts_bucket_name}/*"]
+  }
+
+  statement {
+    sid    = "AllowLambdaDeploy"
+    effect = "Allow"
+
+    actions = [
+      "lambda:UpdateFunctionCode",
+      "lambda:PublishVersion",
+    ]
+
+    resources = [aws_lambda_function.this.arn]
   }
 }

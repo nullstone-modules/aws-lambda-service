@@ -8,6 +8,11 @@ output "artifacts_bucket_name" {
   description = "string ||| The name of the created S3 bucket."
 }
 
+output "artifacts_key_template" {
+  value       = "service-{{app-version}}.zip"
+  description = "string ||| Template for s3 object key that is used for Lambda function ({{app-version}} should be replaced with the app-version)"
+}
+
 output "deployer" {
   value = {
     name       = aws_iam_user.deployer.name
