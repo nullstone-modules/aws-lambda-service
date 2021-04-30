@@ -40,5 +40,5 @@ locals {
 
   has_subdomain      = try(length(data.ns_connection.subdomain.outputs.fqdn), 0) > 0
   subdomain_name     = try(data.ns_connection.subdomain.outputs.fqdn, "")
-  subdomain_cert_arn = try(data.ns_connection.subdomain.outputs.cert_arn, "")
+  subdomain_cert_arn = data.ns_connection.subdomain.outputs.cert_arn
 }
