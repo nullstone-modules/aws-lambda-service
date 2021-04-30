@@ -29,7 +29,11 @@ data "archive_file" "placeholder" {
     filename = "index.js"
     content  = <<EOF
 exports.handler = async (event) => {
-  console.log("Hello world");
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify('Welcome to Nullstone!'),
+    };
+    return response;
 };
 EOF
   }
