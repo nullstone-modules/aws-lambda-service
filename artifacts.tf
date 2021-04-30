@@ -4,7 +4,7 @@ locals {
 
 resource "aws_s3_bucket" "artifacts" {
   bucket = local.artifacts_bucket_name
-  acl    = private
+  acl    = "private"
   tags   = data.ns_workspace.this.tags
 
   server_side_encryption_configuration {
@@ -16,6 +16,6 @@ resource "aws_s3_bucket" "artifacts" {
   }
 
   object_lock_configuration {
-    object_lock_enabled = true
+    object_lock_enabled = "Enabled"
   }
 }

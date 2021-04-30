@@ -30,7 +30,7 @@ resource "aws_apigatewayv2_domain_name" "this" {
 
 resource "aws_apigatewayv2_api_mapping" "this" {
   api_id      = aws_apigatewayv2_api.this[count.index].id
-  domain_name = aws_apigatewayv2_domain_name[count.index].this.domain_name
+  domain_name = aws_apigatewayv2_domain_name.this[count.index].domain_name
   stage       = "$default"
 
   count = local.has_subdomain ? 1 : 0
