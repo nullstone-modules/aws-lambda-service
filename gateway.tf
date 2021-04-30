@@ -8,21 +8,14 @@ resource "aws_apigatewayv2_api" "this" {
   count = local.has_subdomain ? 1 : 0
 }
 
-locals {
-  domain_name_configurations = local.subdomain_cert_arn != "" ? [] : []
-}
-
 resource "aws_apigatewayv2_domain_name" "this" {
   domain_name = local.subdomain_name
   tags        = data.ns_workspace.this.tags
 
-  dynamic "domain_name_configuration" {
-    for_each = compact([local.subdomain_cert_arn])
-    content {
-      certificate_arn = domain_name_configuration.value
-      endpoint_type   = "REGIONAL"
-      security_policy = "TLS_1_2"
-    }
+  domain_name_configuration {
+    certificate_arn = local.subdomain_cert_arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
   }
 
   count = local.has_subdomain ? 1 : 0
