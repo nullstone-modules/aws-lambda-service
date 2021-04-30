@@ -22,7 +22,7 @@ resource "aws_s3_bucket" "artifacts" {
 }
 
 data "archive_file" "placeholder" {
-  output_path = "placeholder.zip"
+  output_path = "${path.cwd}/placeholder.zip"
   type        = "zip"
 
   source {
