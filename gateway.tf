@@ -9,7 +9,7 @@ resource "aws_apigatewayv2_api" "this" {
 }
 
 resource "aws_apigatewayv2_domain_name" "this" {
-  domain_name = local.subdomain_name
+  domain_name = trimsuffix(local.subdomain_name, ".")
   tags        = data.ns_workspace.this.tags
 
   domain_name_configuration {
