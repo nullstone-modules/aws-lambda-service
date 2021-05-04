@@ -1,11 +1,11 @@
 locals {
   env_vars = merge(var.service_env_vars, {
-    "NULLSTONE" = "true"
+    "NULLSTONE_ENV" = data.ns_workspace.this.env
   })
 }
 
 resource "aws_lambda_function" "this" {
-  function_name = data.ns_workspace.this.hyphenated_name
+  function_name = local.resource_name
   handler       = var.service_handler
   role          = aws_iam_role.executor.arn
   runtime       = var.service_runtime

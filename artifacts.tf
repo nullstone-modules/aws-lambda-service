@@ -1,5 +1,5 @@
 locals {
-  artifacts_bucket_name = "${data.ns_workspace.this.block}-artifacts-${random_string.resource_suffix.result}"
+  artifacts_bucket_name = "artifacts-${local.resource_name}"
 }
 
 resource "aws_s3_bucket" "artifacts" {

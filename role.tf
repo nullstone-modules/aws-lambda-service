@@ -1,5 +1,5 @@
 resource "aws_iam_role" "executor" {
-  name               = data.ns_workspace.this.hyphenated_name
+  name               = local.resource_name
   assume_role_policy = data.aws_iam_policy_document.executor_assume.json
   tags               = data.ns_workspace.this.tags
 }

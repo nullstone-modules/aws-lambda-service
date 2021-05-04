@@ -1,5 +1,5 @@
 resource "aws_iam_user" "deployer" {
-  name = "${data.ns_workspace.this.block}-deployer-${random_string.resource_suffix.result}"
+  name = "deployer-${local.resource_name}"
   tags = data.ns_workspace.this.tags
 }
 

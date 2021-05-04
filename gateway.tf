@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "this" {
-  name                         = data.ns_workspace.this.hyphenated_name
+  name                         = local.resource_name
   protocol_type                = "HTTP"
   disable_execute_api_endpoint = true
   target                       = aws_lambda_function.this.invoke_arn
