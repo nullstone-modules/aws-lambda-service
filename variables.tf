@@ -43,15 +43,3 @@ The entrypoint defined in the code that AWS executes when running the lambda.
 See https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-features.html#gettingstarted-features-programmingmodel for runtime-specific instructions.
 EOF
 }
-
-resource "random_string" "resource_suffix" {
-  length  = 5
-  lower   = true
-  upper   = false
-  number  = false
-  special = false
-}
-
-locals {
-  resource_name = "${data.ns_workspace.this.block}-${random_string.resource_suffix.result}"
-}

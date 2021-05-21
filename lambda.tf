@@ -1,6 +1,6 @@
 locals {
   env_vars = merge(var.service_env_vars, {
-    "NULLSTONE_ENV" = data.ns_workspace.this.env
+    "NULLSTONE_ENV" = data.ns_workspace.this.env_name
   })
 }
 
