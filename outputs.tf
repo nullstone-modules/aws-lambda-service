@@ -1,3 +1,7 @@
+output "region" {
+  value = data.aws_region.this.name
+}
+
 output "artifacts_bucket_arn" {
   value       = aws_s3_bucket.artifacts.arn
   description = "string ||| The ARN of the created S3 bucket."
