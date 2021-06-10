@@ -28,12 +28,6 @@ output "deployer" {
 
   sensitive = true
 }
-
-output "log_group_name" {
-  value       = aws_cloudwatch_log_group.this.name
-  description = "string ||| Cloudwatch Log Group for Lambda function"
-}
-
 output "lambda_name" {
   value       = aws_lambda_function.this.function_name
   description = "string ||| Lambda Function Name"
@@ -42,4 +36,20 @@ output "lambda_name" {
 output "lambda_arn" {
   value       = aws_lambda_function.this.arn
   description = "string ||| Lambda Function ARN"
+}
+
+output "log_provider" {
+  value       = "cloudwatch"
+  description = "string ||| "
+}
+
+output "log_group_name" {
+  value       = module.logs.name
+  description = "string ||| "
+}
+
+output "log_reader" {
+  value       = module.logs.reader
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
+  sensitive   = true
 }
