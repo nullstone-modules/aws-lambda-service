@@ -9,6 +9,7 @@ module "{{ .TfModuleName }}" {
   {{ if (ne .SourceVersion "latest") }}version = "{{ .SourceVersion }}"{{ end }}
 
   app_metadata = {
+    function_arn      = aws_lambda_function.this.arn
     function_name     = local.resource_name
     role_name         = aws_iam_role.executor.name
     role_arn          = aws_iam_role.executor.arn
