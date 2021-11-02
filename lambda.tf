@@ -12,7 +12,7 @@ resource "aws_lambda_function" "this" {
   runtime       = var.service_runtime
   memory_size   = var.service_memory
   timeout       = var.service_timeout
-  tags          = data.ns_workspace.this.tags
+  tags          = local.tags
   s3_bucket     = aws_s3_bucket.artifacts.bucket
   s3_key        = local.has_artifact ? local.artifact_key : aws_s3_bucket_object.placeholder.key
 

@@ -1,6 +1,6 @@
 resource "aws_iam_user" "deployer" {
   name = "deployer-${local.resource_name}"
-  tags = data.ns_workspace.this.tags
+  tags = local.tags
 }
 
 resource "aws_iam_access_key" "deployer" {
