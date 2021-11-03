@@ -1,0 +1,42 @@
+{{ range . -}}
+provider "ns" {
+  capability_id = {{ .Id }}
+  alias         = "cap_{{ .Id }}"
+}
+
+module "{{ .TfModuleName }}" {
+  source  = "{{ .Source }}/any"
+  {{ if (ne .SourceVersion "latest") }}version = "{{ .SourceVersion }}"{{ end }}
+
+  app_metadata = {
+    function_arn      = aws_lambda_function.this.arn
+    function_name     = local.resource_name
+    role_name         = aws_iam_role.executor.name
+    role_arn          = aws_iam_role.executor.arn
+    security_group_id = try(aws_security_group.this[0].id, "")
+    log_group_name    = module.logs.name
+  }
+
+  {{- range $key, $value := .Variables }}
+  {{ if not $value.Unused -}}
+  {{ $key }} = jsondecode({{ $value.Value | to_json_string }})
+  {{- end }}{{ end }}
+
+  providers = {
+    ns = ns.cap_{{ .Id}}
+  }
+}
+{{ end }}
+module "caps" {
+  source  = "nullstone-modules/cap-merge/ns"
+  modules = local.modules
+}
+
+locals {
+  modules       = [
+{{- range $index, $element := .ExceptNeedsDestroyed.TfModuleAddrs -}}
+{{ if $index }}, {{ end }}{{ $element }}
+{{- end -}}
+]
+  capabilities  = module.caps.outputs
+}

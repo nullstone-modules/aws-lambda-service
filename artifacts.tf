@@ -5,7 +5,7 @@ locals {
 resource "aws_s3_bucket" "artifacts" {
   bucket        = local.artifacts_bucket_name
   acl           = "private"
-  tags          = data.ns_workspace.this.tags
+  tags          = local.tags
   force_destroy = true
 
   server_side_encryption_configuration {

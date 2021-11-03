@@ -53,3 +53,11 @@ output "log_reader" {
   description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
   sensitive   = true
 }
+
+output "private_urls" {
+  value = [for url in try(local.capabilities.private_urls, []) : url["url"]]
+}
+
+output "public_urls" {
+  value = [for url in try(local.capabilities.public_urls, []) : url["url"]]
+}

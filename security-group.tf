@@ -1,7 +1,7 @@
 resource "aws_security_group" "this" {
   name   = local.resource_name
   vpc_id = data.ns_connection.network.outputs.vpc_id
-  tags   = merge(data.ns_workspace.this.tags, { Name = local.resource_name })
+  tags   = merge(local.tags, { Name = local.resource_name })
 
   count = local.has_network ? 1 : 0
 }
