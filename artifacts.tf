@@ -4,22 +4,29 @@ locals {
 
 resource "aws_s3_bucket" "artifacts" {
   bucket        = local.artifacts_bucket_name
-  acl           = "private"
   tags          = local.tags
   force_destroy = true
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"
-      }
-    }
-  }
 
   object_lock_configuration {
     object_lock_enabled = "Enabled"
   }
 }
+
+resource "aws_s3_bucket_acl" "artifacts" {
+  bucket = aws_s3_bucket.artifacts.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "artifacts" {
+  bucket = aws_s3_bucket.artifacts.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "aws:kms"
+    }
+  }
+}
+
 
 data "archive_file" "placeholder" {
   output_path = "placeholder.zip"
