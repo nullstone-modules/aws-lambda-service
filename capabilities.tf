@@ -1,4 +1,5 @@
 // This file is replaced by code-generation using 'capabilities.tf.tmpl'
+// This file helps app module creators define a contract for what types of capability outputs are supported.
 locals {
   capabilities = {
     env = [
@@ -13,7 +14,7 @@ locals {
     // They will be flattened into list(string) when we output from this module
     private_urls = [
       {
-        value = ""
+        url = ""
       }
     ]
 
@@ -22,7 +23,7 @@ locals {
     // They will be flattened into list(string) when we output from this module
     public_urls = [
       {
-        value = ""
+        url = ""
       }
     ]
 
