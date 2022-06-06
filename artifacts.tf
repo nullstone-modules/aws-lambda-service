@@ -3,12 +3,20 @@ locals {
 }
 
 resource "aws_s3_bucket" "artifacts" {
-  bucket        = local.artifacts_bucket_name
-  tags          = local.tags
-  force_destroy = true
+  bucket              = local.artifacts_bucket_name
+  tags                = local.tags
+  force_destroy       = true
+  object_lock_enabled = true
+}
 
-  object_lock_configuration {
-    object_lock_enabled = "Enabled"
+resource "aws_s3_bucket_object_lock_configuration" "artifacts" {
+  bucket = aws_s3_bucket.artifacts.bucket
+
+  rule {
+    default_retention {
+      mode = "COMPLIANCE"
+      days = 5
+    }
   }
 }
 
@@ -46,18 +54,18 @@ EOF
   }
 }
 
-data "aws_s3_bucket_objects" "find_existing" {
+data "aws_s3_objects" "find_existing" {
   bucket = aws_s3_bucket.artifacts.bucket
   prefix = local.artifact_key
 }
 
 locals {
   artifact_key = "service-${local.app_version}.zip"
-  has_artifact = length(data.aws_s3_bucket_objects.find_existing.keys) > 0
+  has_artifact = length(data.aws_s3_objects.find_existing.keys) > 0
 }
 
 // Add a placeholder object if it doesn't exit
-resource "aws_s3_bucket_object" "placeholder" {
+resource "aws_s3_object" "placeholder" {
   bucket = aws_s3_bucket.artifacts.bucket
   key    = "placeholder.zip"
   source = data.archive_file.placeholder.output_path
