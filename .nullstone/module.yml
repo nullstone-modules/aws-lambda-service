@@ -1,7 +1,7 @@
 org_name: nullstone
 name: aws-lambda-service
 friendly_name: Lambda Service
-description: Creates a lambda service
+description: Creates an application hosted in AWS Lambda
 category: app/serverless
 type: service/aws-lambda
 appCategories: []
