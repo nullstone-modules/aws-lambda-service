@@ -1,4 +1,3 @@
-
 data "ns_app_env" "this" {
   stack_id = data.ns_workspace.this.stack_id
   app_id   = data.ns_workspace.this.block_id
@@ -16,7 +15,7 @@ locals {
     function_name     = local.resource_name
     role_name         = aws_iam_role.executor.name
     role_arn          = aws_iam_role.executor.arn
-    security_group_id = try(aws_security_group.this[0].id, "")
+    security_group_id = aws_security_group.this.id
     log_group_name    = module.logs.name
   })
 }

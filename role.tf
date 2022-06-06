@@ -24,8 +24,6 @@ resource "aws_iam_role_policy_attachment" "executor_basic" {
 resource "aws_iam_role_policy_attachment" "executor_vpc" {
   role       = aws_iam_role.executor.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-
-  count = local.has_network ? 1 : 0
 }
 
 resource "aws_iam_role_policy" "executor" {

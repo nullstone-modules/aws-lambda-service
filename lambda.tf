@@ -14,15 +14,11 @@ resource "aws_lambda_function" "this" {
   timeout       = var.service_timeout
   tags          = local.tags
   s3_bucket     = aws_s3_bucket.artifacts.bucket
-  s3_key        = local.has_artifact ? local.artifact_key : aws_s3_bucket_object.placeholder.key
+  s3_key        = local.has_artifact ? local.artifact_key : aws_s3_object.placeholder.key
 
-  dynamic "vpc_config" {
-    for_each = local.vpc_configs
-
-    content {
-      security_group_ids = vpc_config.value["security_group_ids"]
-      subnet_ids         = vpc_config.value["subnet_ids"]
-    }
+  vpc_config {
+    security_group_ids = [aws_security_group.this.id]
+    subnet_ids         = local.private_subnet_ids
   }
 
   environment {
