@@ -46,7 +46,7 @@ output "log_provider" {
 
 output "log_group_name" {
   value       = module.logs.name
-  description = "string ||| "
+  description = "string ||| The name of the cloudwatch log group containing application logs."
 }
 
 output "log_reader" {

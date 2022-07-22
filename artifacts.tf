@@ -35,7 +35,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "artifacts" {
   }
 }
 
-
+/*
+NOTE: We added this file to the module
+      Uncomment if you want to regenerate placeholder.zip
 data "archive_file" "placeholder" {
   output_path = "placeholder.zip"
   type        = "zip"
@@ -54,6 +56,17 @@ EOF
   }
 }
 
+locals {
+  placeholder_path = data.archive_file.placeholder.output_path
+  placeholder_etag = data.archive_file.placeholder.output_md5
+}
+*/
+
+locals {
+  placeholder_path = "placeholder.zip"
+  placeholder_etag = "fe659b4a02283a5b5876acd4981681d9"
+}
+
 data "aws_s3_objects" "find_existing" {
   bucket = aws_s3_bucket.artifacts.bucket
   prefix = local.artifact_key
@@ -68,8 +81,8 @@ locals {
 resource "aws_s3_object" "placeholder" {
   bucket = aws_s3_bucket.artifacts.bucket
   key    = "placeholder.zip"
-  source = data.archive_file.placeholder.output_path
-  etag   = data.archive_file.placeholder.output_md5
+  source = local.placeholder_path
+  etag   = local.placeholder_etag
 
   lifecycle { ignore_changes = [etag] }
 }
