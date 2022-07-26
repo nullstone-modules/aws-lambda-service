@@ -9,17 +9,6 @@ resource "aws_s3_bucket" "artifacts" {
   object_lock_enabled = true
 }
 
-resource "aws_s3_bucket_object_lock_configuration" "artifacts" {
-  bucket = aws_s3_bucket.artifacts.bucket
-
-  rule {
-    default_retention {
-      mode = "COMPLIANCE"
-      days = 5
-    }
-  }
-}
-
 resource "aws_s3_bucket_acl" "artifacts" {
   bucket = aws_s3_bucket.artifacts.id
   acl    = "private"
@@ -64,7 +53,7 @@ locals {
 
 locals {
   placeholder_path = "placeholder.zip"
-  placeholder_etag = "fe659b4a02283a5b5876acd4981681d9"
+  placeholder_etag = filemd5(local.placeholder_path)
 }
 
 data "aws_s3_objects" "find_existing" {
