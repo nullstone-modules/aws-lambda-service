@@ -6,6 +6,10 @@ locals {
   raw_secret_keys = [for secret in lookup(local.capabilities, "secrets", []) : secret["name"]]
   secret_keys     = can(nonsensitive(local.raw_secret_keys)) ? toset(nonsensitive(local.raw_secret_keys)) : toset(local.raw_secret_keys)
   cap_secrets     = { for secret in try(local.capabilities.secrets, []) : secret["name"] => secret["value"] }
+
+  // Since lambda does not have secret injection, we are going to add a list of env vars mapping the secret ids
+  // e.g. POSTGRES_URL => POSTGRES_URL_SECRET_ID = <secret-id>
+  app_secret_ids = { for key in local.secret_keys : key => aws_secretsmanager_secret.app_secret[key].id }
 }
 
 resource "aws_secretsmanager_secret" "app_secret" {
