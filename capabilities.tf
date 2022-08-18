@@ -44,5 +44,23 @@ locals {
         }
       }
     ]
+
+    permissions = [
+      {
+        // required
+        sid_prefix = ""
+        action     = "lambda:InvokeFunction" // lambda:InvokeFunction | lambda:GetFunction
+        principal  = ""
+
+        // optional
+        source_arn             = ""
+        source_account         = ""
+        event_source_token     = ""
+        qualifier              = ""
+        revision_id            = ""
+        principal_org_id       = ""
+        function_url_auth_type = ""
+      }
+    ]
   }
 }
