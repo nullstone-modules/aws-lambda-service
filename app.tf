@@ -10,7 +10,7 @@ locals {
 
 locals {
   app_metadata = tomap({
-    // Inject app metadata into capabilities here (e.g. security_group_name, role_name)
+    // Inject app metadata into capabilities here (e.g. security_group_id, role_name)
     function_name = local.resource_name
     // We can't use aws_lambda_function.this.arn because it will create a cycle lambda => env => capabilities => lambda
     // NOTE: This *may* introduce a race condition for newly-launched lambdas
