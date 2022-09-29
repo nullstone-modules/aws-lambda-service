@@ -1,6 +1,18 @@
 // This file is replaced by code-generation using 'capabilities.tf.tmpl'
 // This file helps app module creators define a contract for what types of capability outputs are supported.
 locals {
+  cap_modules = [
+    {
+      id         = 0
+      namespace  = ""
+      env_prefix = ""
+      outputs    = {}
+    }
+  ]
+
+  cap_env_vars = {}
+  cap_secrets  = {}
+
   capabilities = {
     env = [
       {
@@ -60,6 +72,20 @@ locals {
         revision_id            = ""
         principal_org_id       = ""
         function_url_auth_type = ""
+      }
+    ]
+
+    event_sources = [
+      {
+        // required
+        name       = "" // used to uniquely identify the event source
+        source_arn = ""
+
+        // optional
+        enabled           = true
+        batch_size        = null // number
+        starting_position = null // string
+        topic             = []   // list(string)
       }
     ]
   }
