@@ -30,4 +30,4 @@ jobs:
       - id: publish
         name: Publish
         run: |
-          nullstone modules publish --version=${{ steps.version.outputs.tag }}
+          nullstone modules publish --version=${{ steps.version.outputs.tag }} --include=placeholder.zip
