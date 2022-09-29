@@ -6,7 +6,9 @@ provider "ns" {
 
 module "{{ .TfModuleName }}" {
   source  = "{{ .Source }}/any"
-  {{ if (ne .SourceVersion "latest") }}version = "{{ .SourceVersion }}"{{ end }}
+  {{- if (ne .SourceVersion "latest") }}
+  version = "{{ .SourceVersion }}"
+  {{- end }}
 
   app_metadata = local.app_metadata
 
