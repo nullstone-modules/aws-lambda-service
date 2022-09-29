@@ -1,9 +1,13 @@
 locals {
-  permissions = try(local.capabilities.permissions, [])
+  permissions = merge(flatten([
+    for mod in local.cap_modules : {
+      for item in lookup(mod.outputs, "permissions", []) : "${mod.id}_${item.sid_prefix}" => item
+    }
+  ])...)
 }
 
 resource "aws_lambda_permission" "caps" {
-  for_each = {for p in local.permissions : p.name => p}
+  for_each = local.permissions
 
   function_name       = aws_lambda_function.this.function_name
   statement_id_prefix = try(each.value.sid_prefix, null)

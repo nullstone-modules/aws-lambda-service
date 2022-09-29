@@ -50,13 +50,13 @@ locals {
 locals {
   cap_env_vars = merge([
     for mod in local.cap_modules : {
-      for item in try(mod.outputs.env, []) : "${mod.env_prefix}${item.name}" => item.value
+      for item in lookup(mod.outputs, "env", []) : "${mod.env_prefix}${item.name}" => item.value
     }
   ]...)
 
   cap_secrets = merge([
     for mod in local.cap_modules : {
-      for item in try(mod.outputs.secrets, []) : "${mod.env_prefix}${item.name}" => item.value
+      for item in lookup(mod.outputs, "secrets", []) : "${mod.env_prefix}${item.name}" => item.value
     }
   ]...)
 }
