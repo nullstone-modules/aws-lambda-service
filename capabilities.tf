@@ -74,5 +74,19 @@ locals {
         function_url_auth_type = ""
       }
     ]
+
+    event_sources = [
+      {
+        // required
+        name       = "" // used to uniquely identify the event source
+        source_arn = ""
+
+        // optional
+        enabled           = true
+        batch_size        = null // number
+        starting_position = null // string
+        topic             = []   // list(string)
+      }
+    ]
   }
 }
