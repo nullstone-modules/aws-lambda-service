@@ -26,23 +26,23 @@ module "caps" {
 }
 
 locals {
-  modules       = [
+  modules      = [
 {{- range $index, $element := .ExceptNeedsDestroyed.TfModuleAddrs -}}
 {{ if $index }}, {{ end }}{{ $element }}
 {{- end -}}
 ]
-  capabilities  = module.caps.outputs
+  capabilities = module.caps.outputs
 
-  cap_modules = merge([
-{{- range $index, $element := .ExceptNeedsDestroyed -}}
-    {{ if $index }}, {{ end }}{{ $element }}{
+  cap_modules = [
+{{- range $index, $element := .ExceptNeedsDestroyed }}
+    {{ if $index }}, {{ end }}{
       id         = {{ $element.Id }}
-      namespace  = {{ $element.Namespace }}
-      env_prefix = {{ $element.EnvPrefix }}
+      namespace  = "{{ $element.Namespace }}"
+      env_prefix = "{{ $element.EnvPrefix }}"
       outputs    = {{ $element.TfModuleAddr }}
     }
-{{ end -}}
-  ]...)
+{{- end }}
+  ]
 }
 
 locals {
