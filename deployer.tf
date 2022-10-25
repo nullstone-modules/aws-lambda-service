@@ -41,10 +41,19 @@ data "aws_iam_policy_document" "deployer" {
   }
 
   statement {
+    sid       = "AllowUpdatePassRole"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = [aws_iam_role.executor.arn]
+  }
+
+  statement {
     sid    = "AllowLambdaDeploy"
     effect = "Allow"
 
     actions = [
+      "lambda:GetFunctionConfiguration",
+      "lambda:UpdateFunctionConfiguration",
       "lambda:UpdateFunctionCode",
       "lambda:PublishVersion",
     ]
