@@ -2,10 +2,14 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/aws" {
-  version = "4.52.0"
+  version     = "4.52.0"
+  constraints = "4.52.0"
   hashes = [
     "h1:5jyRee5bTD77EwiNdoBACpUYBgdTYkdl+Dl1h1yA2cg=",
     "h1:Ofm8syFCBU8MFOiU+zg+vnTWkSdozpmvaA9xukNvcBg=",
+    "h1:SL3rwPmLmUVKVuWzFwvwF340lPD/m8/ms1ZzYC17RHs=",
+    "h1:XVFYieTSH9PCpOiFWnNzjNYXTrgSb2ZpLh49/jMe9Jk=",
+    "h1:pTH20eNlkwO3vxYb3f/Dm9QXjhVeidpvrn5YcvydM7Y=",
     "zh:00c865de3a0e7643f4e2e5c8d4ba91eee94a46d41090eb134baca6b58c107172",
     "zh:1430682e26eba25d8ace19fa780361187f474153e455545235b4fe30637fdcc2",
     "zh:1b9a4e5c889bd2022bd59fb924dc78e189f1b7a4fd718fcacda0f0a4cb74d6eb",
@@ -27,7 +31,10 @@ provider "registry.terraform.io/hashicorp/aws" {
 provider "registry.terraform.io/hashicorp/random" {
   version = "3.4.3"
   hashes = [
+    "h1:hV66lcagXXRwwCW3Y542bI1JgPo8z/taYKT7K+a2Z5U=",
     "h1:hXUPrH8igYBhatzatkp80RCeeUJGu9lQFDyKemOlsTo=",
+    "h1:saZR+mhthL0OZl4SyHXZraxyaBNVMxiZzks78nWcZ2o=",
+    "h1:tL3katm68lX+4lAncjQA9AXL4GR/VM+RPwqYf4D2X8Q=",
     "h1:xZGZf18JjMS06pFa4NErzANI98qi59SEcBsOcS2P2yQ=",
     "zh:41c53ba47085d8261590990f8633c8906696fa0a3c4b384ff6a7ecbf84339752",
     "zh:59d98081c4475f2ad77d881c4412c5129c56214892f490adf11c7e7a5a47de9b",
@@ -48,6 +55,9 @@ provider "registry.terraform.io/nullstone-io/ns" {
   version = "0.6.13"
   hashes = [
     "h1:6u8nioR3BQfmqk9Q8vFfR1iEcyvTjToKyPct7uZCPbk=",
+    "h1:7HNm+ffZ5bAd4bdw+DG+oJgQ/NVYRn5leidyMot91DE=",
+    "h1:P8EHXu/GoPb9FSSe9dRY5CrTl48Vflgn4nEfmtN6E8A=",
+    "h1:ZB0tan6PHUYnzLXz/5oq0uRLBttu+8cTv0cGuDhBzqE=",
     "h1:s8zJTF8ngWlEOj8ZDirPGFxoa2CpHE2BA2Ps58BL8W0=",
     "zh:06478787202d592ec601c626a7ebd2326f2cd644bfb6ecb517a5267404870625",
     "zh:0b94635652840432f0eb599516a96b35f5ac77211728fcf36e8ee73fc6a0f095",
