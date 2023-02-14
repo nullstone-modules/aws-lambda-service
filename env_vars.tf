@@ -29,7 +29,7 @@ locals {
     NULLSTONE_PRIVATE_HOSTS = join(",", local.private_hosts)
   })
 
-  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, local.app_secret_ids, var.service_env_vars)
+  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, var.service_env_vars)
   input_secrets  = merge(local.cap_secrets, var.service_secrets)
 }
 
@@ -41,5 +41,5 @@ data "ns_env_variables" "this" {
 locals {
   secret_keys  = data.ns_env_variables.this.secret_keys
   all_secrets  = data.ns_env_variables.this.secrets
-  all_env_vars = data.ns_env_variables.this.env_variables
+  all_env_vars = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids)
 }
