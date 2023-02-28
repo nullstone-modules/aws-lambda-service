@@ -10,9 +10,8 @@ locals {
     }
   ]
 
-  cap_env_vars    = {}
-  cap_secrets     = {}
-  cap_secret_keys = []
+  cap_env_vars = {}
+  cap_secrets  = {}
 
   capabilities = {
     env = [
