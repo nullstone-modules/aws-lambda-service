@@ -12,9 +12,9 @@ module "{{ .TfModuleName }}" {
 
   app_metadata = local.app_metadata
   {{ range $key, $value := .Variables -}}
-  {{ if not $value.Unused -}}{{ if $value.Value -}}
+  {{ if $value.HasValue -}}
   {{ $key }} = jsondecode({{ $value.Value | to_json_string }})
-  {{- end -}}{{- end }}
+  {{- end }}
   {{ end }}
   providers = {
     ns = ns.cap_{{ .Id}}
@@ -27,12 +27,12 @@ module "caps" {
 }
 
 locals {
-  modules      = [
+  modules       = [
 {{- range $index, $element := .ExceptNeedsDestroyed.TfModuleAddrs -}}
 {{ if $index }}, {{ end }}{{ $element }}
 {{- end -}}
 ]
-  capabilities = module.caps.outputs
+  capabilities  = module.caps.outputs
 
   cap_modules = [
 {{- range $index, $element := .ExceptNeedsDestroyed }}
@@ -58,10 +58,4 @@ locals {
       for item in lookup(mod.outputs, "secrets", []) : "${mod.env_prefix}${item.name}" => item.value
     }
   ]...)
-
-  cap_secret_keys = flatten([
-    for mod in local.cap_modules : [
-      for item in lookup(mod.outputs, "secrets", []) : "${mod.env_prefix}${item.name}"
-    ]
-  ])
 }
