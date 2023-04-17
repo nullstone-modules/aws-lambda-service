@@ -1,4 +1,4 @@
-variable "service_memory" {
+variable "memory" {
   type        = number
   default     = 128
   description = <<EOF
@@ -9,7 +9,7 @@ This means the default is 128 MiB or 0.125 GiB.
 EOF
 }
 
-variable "service_timeout" {
+variable "timeout" {
   type        = number
   default     = 3
   description = <<EOF
@@ -18,7 +18,7 @@ The maximum this can be set is 900 seconds (15 minutes).
 EOF
 }
 
-variable "service_runtime" {
+variable "runtime" {
   type        = string
   description = <<EOF
 The runtime of the service.
@@ -26,7 +26,7 @@ This can be set to one of nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x,
 EOF
 }
 
-variable "service_handler" {
+variable "handler" {
   type        = string
   description = <<EOF
 The entrypoint defined in the code that AWS executes when running the lambda.
