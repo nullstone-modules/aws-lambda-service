@@ -1,10 +1,10 @@
 resource "aws_lambda_function" "this" {
   function_name = local.resource_name
-  handler       = var.service_handler
+  handler       = var.handler
   role          = aws_iam_role.executor.arn
-  runtime       = var.service_runtime
-  memory_size   = var.service_memory
-  timeout       = var.service_timeout
+  runtime       = var.runtime
+  memory_size   = var.memory
+  timeout       = var.timeout
   tags          = local.tags
   s3_bucket     = aws_s3_bucket.artifacts.bucket
   s3_key        = local.has_artifact ? local.artifact_key : aws_s3_object.placeholder.key
