@@ -15,9 +15,18 @@ resource "aws_s3_bucket_lifecycle_configuration" "artifacts" {
   bucket = aws_s3_bucket.artifacts.id
 
   rule {
-    id     = "noop"
+    id     = "AbortFailed"
     status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
   }
+}
+
+resource "aws_s3_bucket_notification" "bucket_notification" {
+  bucket      = aws_s3_bucket.artifacts.id
+  eventbridge = true
 }
 
 resource "aws_s3_bucket_public_access_block" "artifacts" {

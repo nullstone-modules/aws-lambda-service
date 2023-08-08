@@ -1,4 +1,5 @@
 resource "aws_lambda_function" "this" {
+  #bridgecrew:skip=CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing". Nullstone users are responsible for code-signing.
   function_name                  = local.resource_name
   handler                        = var.handler
   role                           = aws_iam_role.executor.arn
