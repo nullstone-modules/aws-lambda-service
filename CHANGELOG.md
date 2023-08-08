@@ -5,6 +5,9 @@
 * Enabled X-Ray tracing.
 * Fixed compliance issues.
 
+# 0.11.1 (Aug 01, 2023)
+* Configure S3 Bucket ownership so ACL can be configured properly.
+
 # 0.11.0 (Apr 25, 2023)
 * Dropped `service_` prefix from variables.
 
