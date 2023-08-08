@@ -1,3 +1,6 @@
+# 0.12.1 (Aug 08, 2023)
+* Updated `README.md` with application management info.
+
 # 0.12.0 (Aug 08, 2023)
 * Added compliance scanning.
 * Added support for dead letter queue capabilities.
