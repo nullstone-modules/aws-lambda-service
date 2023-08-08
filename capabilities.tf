@@ -88,5 +88,11 @@ locals {
         topic             = []   // list(string)
       }
     ]
+
+    dead_letter_queues = [
+      {
+        queue_arn = ""
+      }
+    ]
   }
 }
