@@ -19,3 +19,26 @@ resource "aws_secretsmanager_secret_version" "app_secret" {
   secret_id     = aws_secretsmanager_secret.app_secret[each.value].id
   secret_string = local.all_secrets[each.value]
 }
+
+resource "aws_iam_role_policy_attachment" "lambda-secrets" {
+  role       = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  policy_arn = aws_iam_policy.secrets.arn
+}
+
+resource "aws_iam_policy" "secrets" {
+  name   = local.resource_name
+  policy = data.aws_iam_policy_document.secrets.json
+}
+
+data "aws_iam_policy_document" "secrets" {
+  statement {
+    sid       = "AllowReadSecrets"
+    effect    = "Allow"
+    resources = local.app_secret_ids
+
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "kms:Decrypt"
+    ]
+  }
+}
