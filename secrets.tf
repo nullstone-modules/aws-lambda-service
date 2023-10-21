@@ -22,7 +22,7 @@ resource "aws_secretsmanager_secret_version" "app_secret" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda-secrets" {
-  role       = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.executor.arn
   policy_arn = aws_iam_policy.secrets.arn
 }
 
