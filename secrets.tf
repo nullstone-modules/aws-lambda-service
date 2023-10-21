@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "secrets" {
   statement {
     sid       = "AllowReadSecrets"
     effect    = "Allow"
-    resources = local.app_secret_arns
+    resources = "*"
 
     actions = [
       "secretsmanager:GetSecretValue",
