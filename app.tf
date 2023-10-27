@@ -16,6 +16,7 @@ locals {
     // NOTE: This *may* introduce a race condition for newly-launched lambdas
     //    e.g. api gateway capability adds an `aws_lambda_permission` before the lambda exists
     function_arn      = "arn:aws:lambda:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:function:${local.resource_name}"
+    invoke_arn        = aws_lambda_function.this.invoke_arn
     role_name         = aws_iam_role.executor.name
     role_arn          = aws_iam_role.executor.arn
     security_group_id = aws_security_group.this.id
