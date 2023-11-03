@@ -10,6 +10,7 @@ locals {
 
 locals {
   lambda_arn = "arn:aws:lambda:${data.aws_region.this.name}:${data.aws_caller_identity.this.account_id}:function:${local.resource_name}"
+  invoke_arn = "arn:aws:apigateway:${data.aws_region.this.name}:lambda:path/2015-03-31/functions/${local.lambda_arn}/invocations"
   app_metadata = tomap({
     // Inject app metadata into capabilities here (e.g. security_group_id, role_name)
     function_name     = local.resource_name
@@ -17,7 +18,7 @@ locals {
     // NOTE: This *may* introduce a race condition for newly-launched lambdas
     //    e.g. api gateway capability adds an `aws_lambda_permission` before the lambda exists
     function_arn      = local.lambda_arn
-    invoke_arn        = "arn:aws:apigateway:${data.aws_region.this.name}:lambda:path/2015-03-31/functions/${local.lambda_arn}/invocations"
+    invoke_arn        = local.invoke_arn
     role_name         = aws_iam_role.executor.name
     role_arn          = aws_iam_role.executor.arn
     security_group_id = aws_security_group.this.id
