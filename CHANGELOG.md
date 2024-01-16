@@ -1,5 +1,8 @@
-# 0.12.2 (Jan 16, 2024)
+# 0.12.17 (Jan 16, 2024)
 * Added metrics outputs to enable real-time monitoring.
+
+# 0.12.16 (Nov 03, 2023)
+* Added `invoke_arn` to `app_metadata` for capabilities.
 
 # 0.12.1 (Aug 08, 2023)
 * Updated `README.md` with application management info.
