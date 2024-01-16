@@ -56,6 +56,21 @@ output "log_reader" {
   sensitive   = true
 }
 
+output "metrics_provider" {
+  value       = "cloudwatch"
+  description = "string ||| "
+}
+
+output "metrics_reader" {
+  value       = module.logs.reader
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read metrics from Cloudwatch."
+  sensitive   = true
+}
+
+output "metrics_mappings" {
+  value = local.metrics_mappings
+}
+
 output "private_urls" {
   value       = local.private_urls
   description = "list(string) ||| A list of URLs only accessible inside the network"
