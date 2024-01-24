@@ -22,24 +22,32 @@ resource "aws_secretsmanager_secret_version" "app_secret" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda-secrets" {
+  count = length(local.secret_keys) > 0 ? 1 : 0
+
   role       = aws_iam_role.executor.name
-  policy_arn = aws_iam_policy.secrets.arn
+  policy_arn = aws_iam_policy.secrets[count.index].arn
 }
 
 resource "aws_iam_policy" "secrets" {
+  count = length(local.secret_keys) > 0 ? 1 : 0
+
   name   = local.resource_name
   policy = data.aws_iam_policy_document.secrets.json
 }
 
 data "aws_iam_policy_document" "secrets" {
-  statement {
-    sid       = "AllowReadSecrets"
-    effect    = "Allow"
-    resources = local.app_secret_arns
+  dynamic "statement" {
+    for_each = length(local.secret_keys) > 0 ? [local.app_secret_arns] : []
 
-    actions = [
-      "secretsmanager:GetSecretValue",
-      "kms:Decrypt"
-    ]
+    content {
+      sid       = "AllowReadSecrets"
+      effect    = "Allow"
+      resources = [each.value]
+  
+      actions = [
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
+      ]
+    }
   }
 }
