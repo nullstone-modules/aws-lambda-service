@@ -1,3 +1,6 @@
+# 0.12.19 (Feb 01, 2024)
+* Fixed usage of `for_each` in secrets policy.
+
 # 0.12.18 (Jan 24, 2024)
 * Fixed secrets policy when no secrets are specified.
 * Enabled `metrics_reader` to access Cloudwatch metrics.
