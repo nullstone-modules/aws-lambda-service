@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "secrets" {
     content {
       sid       = "AllowReadSecrets"
       effect    = "Allow"
-      resources = [statement.value]
+      resources = statement.value
   
       actions = [
         "secretsmanager:GetSecretValue",

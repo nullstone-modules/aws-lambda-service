@@ -1,3 +1,6 @@
+# 0.12.20 (Feb 01, 2024)
+* Fixed secrets policy to set resources to `[<arn>, ...]` instead of `[[<arn>,...]]`.
+
 # 0.12.19 (Feb 01, 2024)
 * Fixed usage of `for_each` in secrets policy.
 
