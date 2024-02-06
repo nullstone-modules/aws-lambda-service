@@ -94,5 +94,18 @@ locals {
         queue_arn = ""
       }
     ]
+
+    // metrics allows capabilities to attach metrics to the application
+    // These metrics are displayed on the Application Monitoring page
+    // See https://docs.nullstone.io/extending/metrics/aws-cloudwatch.html#metrics-mappings
+    metrics = [
+      {
+        name = ""
+        type = "usage|usage-percent|duration|generic"
+        unit = ""
+
+        mappings = "{}"
+      }
+    ]
   }
 }
