@@ -46,5 +46,16 @@ data "ns_secret_keys" "this" {
 locals {
   secret_keys  = data.ns_secret_keys.this.secret_keys
   all_secrets  = data.ns_env_variables.this.secrets
-  all_env_vars = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids)
+  existing_secret_refs = data.ns_env_variables.this.secret_refs // TEST = arn:aws:secretsmanager:us-east-1:522657839841:secret:hello-world/SECRET_KEY_BASE/20240704174816540100000006-WgCRyY
+  existing_secret_ids = { for key, ref in data.ns_env_variables.this.secret_refs : key => data.aws_secretsmanager_secret.existing_secret[key].id }
+  all_env_vars = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids, local.existing_secret_ids)
+}
+
+// existing secrets are referenced by arn
+// in order to stay consistent with other secrets, we need to convert the arn to id
+// this is used above to convert the map of env variables that map to secret(arn) to id
+data "aws_secretsmanager_secret" "existing_secret" {
+  for_each = local.existing_secret_refs
+
+  arn = each.value
 }
