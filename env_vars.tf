@@ -44,11 +44,11 @@ data "ns_secret_keys" "this" {
 }
 
 locals {
-  secret_keys  = data.ns_secret_keys.this.secret_keys
-  all_secrets  = data.ns_env_variables.this.secrets
+  secret_keys          = data.ns_secret_keys.this.secret_keys
+  all_secrets          = data.ns_env_variables.this.secrets
   existing_secret_refs = data.ns_env_variables.this.secret_refs // TEST = arn:aws:secretsmanager:us-east-1:522657839841:secret:hello-world/SECRET_KEY_BASE/20240704174816540100000006-WgCRyY
-  existing_secret_ids = { for key, ref in data.ns_env_variables.this.secret_refs : key => data.aws_secretsmanager_secret.existing_secret[key].id }
-  all_env_vars = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids, local.existing_secret_ids)
+  existing_secret_ids  = { for key, ref in data.ns_env_variables.this.secret_refs : key => data.aws_secretsmanager_secret.existing_secret[key].id }
+  all_env_vars         = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids, local.existing_secret_ids)
 }
 
 // existing secrets are referenced by arn
