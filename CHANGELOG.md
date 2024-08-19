@@ -1,4 +1,8 @@
-# 0.12.21 (Feb 06, 2024)
+# 0.12.25 (Jul 18, 2024)
+* Added the ability to reference existing secrets using interpolation.
+* e.g. "{{ secret(arn-of-existing-secret) }}"
+
+* # 0.12.21 (Feb 06, 2024)
 * Added support for metrics in capabilities.
 
 # 0.12.20 (Feb 01, 2024)
