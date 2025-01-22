@@ -1,3 +1,6 @@
+# 0.12.26 (Jan 22, 2025)
+* When an app secret is removed, it is immediately deleted from AWS secrets manager.
+
 # 0.12.25 (Jul 18, 2024)
 * Added the ability to reference existing secrets using interpolation.
 * e.g. "{{ secret(arn-of-existing-secret) }}"
