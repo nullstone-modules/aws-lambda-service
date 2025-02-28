@@ -1,3 +1,6 @@
+# 0.12.27 (Feb 27, 2025)
+* Fixed `topics` usage from `event_sources` in capabilities.
+
 # 0.12.26 (Jan 22, 2025)
 * When an app secret is removed, it is immediately deleted from AWS secrets manager.
 

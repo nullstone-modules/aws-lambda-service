@@ -15,5 +15,5 @@ resource "aws_lambda_event_source_mapping" "caps" {
 
   batch_size        = try(each.value.batch_size, null)
   starting_position = try(each.value.starting_position, null)
-  topics            = try(each.value.topics, null)
+  topics            = try(toset(jsondecode(each.value.topics)), null)
 }
