@@ -53,5 +53,5 @@ locals {
   secret_keys          = data.ns_secret_keys.this.secret_keys
   all_secrets          = data.ns_env_variables.this.secrets
   all_env_vars         = merge(data.ns_env_variables.this.env_variables, local.app_secret_ids)
-  existing_secret_refs = [for key, ref in data.ns_env_variables.this.secret_refs : { name = key, valueFrom = ref }]
+  existing_secret_refs = data.ns_env_variables.this.secret_refs
 }
