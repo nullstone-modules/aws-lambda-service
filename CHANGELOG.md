@@ -1,3 +1,6 @@
+# 0.13.4 (Sep 22, 2025)
+* Restored "existing" secret refs that were removed in v0.13.0 upgrade.
+
 # 0.13.3 (Sep 22, 2025)
 * Prevent resource recreation as a result of changes in v0.13.0 upgrade.
 
