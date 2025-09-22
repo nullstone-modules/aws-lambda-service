@@ -1,7 +1,7 @@
 locals {
   permissions = merge(flatten([
     for mod in local.cap_modules : {
-      for item in lookup(mod.outputs, "permissions", []) : "${mod.name}_${item.sid_prefix}" => item
+      for item in lookup(mod.outputs, "permissions", []) : "${mod.tfId}_${item.sid_prefix}" => item
     }
   ])...)
 }
