@@ -1,3 +1,6 @@
+# 0.13.1 (Sep 22, 2025)
+* Fixed syntax from v0.13.0 upgrade.
+
 # 0.13.0 (Sep 22, 2025)
 * Upgrade terraform providers.
 
