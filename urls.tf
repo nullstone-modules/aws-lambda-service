@@ -3,7 +3,7 @@ locals {
   // Typically, they are created through capabilities attached to the application
   // If this module has URLs, add them here as list(string)
   additional_private_urls = []
-  additional_public_urls  = []
+  additional_public_urls = []
 
   private_urls = concat([for url in try(local.capabilities.private_urls, []) : url["url"]], local.additional_private_urls)
   public_urls  = concat([for url in try(local.capabilities.public_urls, []) : url["url"]], local.additional_public_urls)
@@ -16,7 +16,7 @@ locals {
 locals {
   authority_matcher = "^(?:(?P<user>[^@]*)@)?(?:(?P<host>[^:]*))(?:[:](?P<port>[\\d]*))?"
   // These tests are here to verify the authority_matcher regex above
-  // To verify, uncomment the following lines and issue `echo 'local.tests' | terraform console`
+  // To verify, uncomment the following lines and issue "echo 'local.tests' | terraform console"
   /*
   tests = tomap({
     "nullstone.io" : regex(local.authority_matcher, "nullstone.io"),

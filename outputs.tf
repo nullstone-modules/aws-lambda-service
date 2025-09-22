@@ -1,5 +1,5 @@
 output "region" {
-  value       = data.aws_region.this.name
+  value       = data.aws_region.this.region
   description = "string ||| The region the lambda was created."
 }
 
