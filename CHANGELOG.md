@@ -1,3 +1,6 @@
+# 0.13.5 (Mar 05, 2026)
+* Upgrade to latest ns terraform provider to improve env var interpolation
+
 # 0.13.4 (Sep 22, 2025)
 * Restored "existing" secret refs that were removed in v0.13.0 upgrade.
 
