@@ -52,7 +52,7 @@ locals {
         logDriver = "awslogs"
         options = {
           "awslogs-region"        = data.aws_region.this.region
-          "awslogs-group"         = module.logs.name
+          "awslogs-group"         = module.scaffold.log_group.name
           "awslogs-stream-prefix" = local.block_name
         }
       }

@@ -28,7 +28,7 @@ locals {
     NULLSTONE_PUBLIC_HOSTS  = join(",", local.public_hosts)
     NULLSTONE_PRIVATE_HOSTS = join(",", local.private_hosts)
   })
-  
+
   input_env_vars    = merge(local.standard_env_vars, local.cap_env_vars, var.env_vars)
   input_secrets     = merge(local.cap_secrets, var.secrets)
   input_secret_keys = nonsensitive(concat(keys(local.cap_secrets), keys(var.secrets)))

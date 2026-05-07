@@ -19,9 +19,9 @@ locals {
     //    e.g. api gateway capability adds an `aws_lambda_permission` before the lambda exists
     function_arn      = local.lambda_arn
     invoke_arn        = local.invoke_arn
-    role_name         = aws_iam_role.executor.name
-    role_arn          = aws_iam_role.executor.arn
+    role_name         = module.scaffold.executor.name
+    role_arn          = module.scaffold.executor.arn
     security_group_id = aws_security_group.this.id
-    log_group_name    = module.logs.name
+    log_group_name    = module.scaffold.log_group.name
   })
 }

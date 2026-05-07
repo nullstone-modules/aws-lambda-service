@@ -1,3 +1,7 @@
+# 0.13.6 (May 07, 2026)
+* Switched to OpenTofu.
+* Migrated app scaffold to open-source module.
+
 # 0.13.5 (Mar 05, 2026)
 * Upgrade to latest ns terraform provider to improve env var interpolation
 

@@ -19,15 +19,8 @@ output "artifacts_key_template" {
 }
 
 output "deployer" {
-  value = {
-    name       = aws_iam_user.deployer.name
-    access_key = aws_iam_access_key.deployer.id
-    secret_key = aws_iam_access_key.deployer.secret
-  }
-
-  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to deploy to the S3 bucket."
-
-  sensitive = true
+  value       = module.scaffold.deployer
+  description = "object({ role_arn: string, session_duration: number }) ||| An IAM role with explicit privilege to publish new Lambda versions and upload artifacts. Assumable by the Nullstone agent."
 }
 
 output "lambda_name" {
@@ -46,12 +39,12 @@ output "log_provider" {
 }
 
 output "log_group_name" {
-  value       = module.logs.name
+  value       = module.scaffold.log_group.name
   description = "string ||| The name of the cloudwatch log group containing application logs."
 }
 
 output "log_reader" {
-  value       = module.logs.reader
+  value       = module.scaffold.log_reader
   description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
   sensitive   = true
 }
@@ -62,7 +55,7 @@ output "metrics_provider" {
 }
 
 output "metrics_reader" {
-  value       = module.logs.reader
+  value       = module.scaffold.log_reader
   description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read metrics from Cloudwatch."
   sensitive   = true
 }

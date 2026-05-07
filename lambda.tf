@@ -2,7 +2,7 @@ resource "aws_lambda_function" "this" {
   #bridgecrew:skip=CKV_AWS_272: "Ensure AWS Lambda function is configured to validate code-signing". Nullstone users are responsible for code-signing.
   function_name                  = local.resource_name
   handler                        = var.handler
-  role                           = aws_iam_role.executor.arn
+  role                           = module.scaffold.executor.arn
   runtime                        = var.runtime
   memory_size                    = var.memory
   timeout                        = var.timeout
@@ -10,7 +10,7 @@ resource "aws_lambda_function" "this" {
   s3_bucket                      = aws_s3_bucket.artifacts.bucket
   s3_key                         = local.has_artifact ? local.artifact_key : aws_s3_object.placeholder.key
   reserved_concurrent_executions = 100
-  kms_key_arn                    = aws_kms_key.this.arn
+  kms_key_arn                    = module.scaffold.kms_key.arn
 
   vpc_config {
     security_group_ids = [aws_security_group.this.id]
