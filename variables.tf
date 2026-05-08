@@ -22,9 +22,9 @@ variable "runtime" {
   type        = string
   description = <<EOF
 The runtime of the service.
-As of this publishing, the possible values support by AWS Lambda are:
-nodejs20.x, nodejs18.x, nodejs16.x, python3.12, python3.11, python3.10, python3.9, python3.8, java21, java17, java11, java8.al2, dotnet8, dotnet7, dotnet6, ruby3.3, ruby3.2, provided.al2023, provided.al2.
-https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+As of this publishing, the possible values supported by AWS Lambda for zip-packaged functions are:
+nodejs24.x, nodejs22.x, python3.14, python3.13, python3.12, python3.11, python3.10, java25, java21, java17, java11, java8.al2, dotnet10, dotnet8, ruby4.0, ruby3.4, ruby3.3, provided.al2023, provided.al2.
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
 EOF
 }
 
