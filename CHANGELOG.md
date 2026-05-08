@@ -1,3 +1,6 @@
+# 0.14.1 (May 08, 2026)
+* Fixed module manifest to use OpenTofu.
+
 # 0.14.0 (May 08, 2026)
 * Switched to OpenTofu.
 * Migrated app scaffold to open-source module.
