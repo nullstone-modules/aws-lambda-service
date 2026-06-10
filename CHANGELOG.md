@@ -1,3 +1,6 @@
+# 0.14.3 (Jul 10, 2026)
+* Fixed ns tf provider.
+
 # 0.14.2 (Jun 10, 2026)
 * Upgraded terraform providers.
 
