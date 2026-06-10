@@ -11,4 +11,6 @@ subplatform: zip
 type: service/aws-lambda
 appCategories: []
 is_public: true
-tool_name: "opentofu"
+tool_name: opentofu
+include: []
+source_url: https://github.com/nullstone-modules/aws-lambda-service

@@ -1,3 +1,6 @@
+# 0.14.2 (Jun 10, 2026)
+* Upgraded terraform providers.
+
 # 0.14.1 (May 08, 2026)
 * Fixed module manifest to use OpenTofu.
 
