@@ -1,7 +1,7 @@
 locals {
   event_sources = merge(flatten([
     for mod in local.cap_modules : {
-      for item in lookup(mod.outputs, "event_sources", []) : "${mod.id}_${item.name}" => item
+      for item in lookup(mod.outputs, "event_sources", []) : "${mod.tfId}_${item.name}" => item
     }
   ])...)
 }

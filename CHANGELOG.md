@@ -1,3 +1,7 @@
+# 0.15.0 (Jun 18, 2026)
+* Upgraded capability scaffolding to reduce conflicts.
+* Used `aws_tags` from upgraded `data.ns_workspace`.
+
 # 0.14.3 (Jul 10, 2026)
 * Fixed ns tf provider.
 

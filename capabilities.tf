@@ -8,24 +8,35 @@ locals {
       namespace  = ""
       env_prefix = ""
       outputs    = {}
+
+      meta = {
+        subcategory = ""
+        platform    = ""
+        subplatform = ""
+        outputNames = []
+      }
     }
   ]
 
-  cap_env_vars = {}
-  cap_secrets  = {}
+  // cap_env_prefixes is a map indexed by tfId which points to the env_prefix in local.cap_modules
+  cap_env_prefixes = tomap({
+    x = ""
+  })
 
   capabilities = {
     env = [
       {
-        name  = ""
-        value = ""
+        cap_tf_id = "x"
+        name      = ""
+        value     = ""
       }
     ]
 
     secrets = [
       {
-        name  = ""
-        value = ""
+        cap_tf_id = "x"
+        name      = ""
+        value     = sensitive("")
       }
     ]
 
@@ -34,7 +45,8 @@ locals {
     // They will be flattened into list(string) when we output from this module
     private_urls = [
       {
-        url = ""
+        cap_tf_id = "x"
+        url       = "http://example"
       }
     ]
 
@@ -43,12 +55,14 @@ locals {
     // They will be flattened into list(string) when we output from this module
     public_urls = [
       {
-        url = ""
+        cap_tf_id = "x"
+        url       = "https://example.com"
       }
     ]
 
     log_configurations = [
       {
+        cap_tf_id = "x"
         logDriver = "awslogs"
         options = {
           "awslogs-region"        = data.aws_region.this.region
@@ -60,6 +74,8 @@ locals {
 
     permissions = [
       {
+        cap_tf_id = "x"
+
         // required
         sid_prefix = ""
         action     = "lambda:InvokeFunction" // lambda:InvokeFunction | lambda:GetFunction
@@ -78,6 +94,8 @@ locals {
 
     event_sources = [
       {
+        cap_tf_id = "x"
+
         // required
         name       = "" // used to uniquely identify the event source
         source_arn = ""
@@ -92,6 +110,7 @@ locals {
 
     dead_letter_queues = [
       {
+        cap_tf_id = "x"
         queue_arn = ""
       }
     ]
@@ -101,9 +120,10 @@ locals {
     // See https://docs.nullstone.io/extending/metrics/aws-cloudwatch.html#metrics-mappings
     metrics = [
       {
-        name = ""
-        type = "usage|usage-percent|duration|generic"
-        unit = ""
+        cap_tf_id = "x"
+        name      = ""
+        type      = "usage|usage-percent|duration|generic"
+        unit      = ""
 
         mappings = "{}"
       }
