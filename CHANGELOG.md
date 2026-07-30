@@ -1,3 +1,6 @@
+# 0.16.0 (Jul 30, 2026)
+* Added optional `notification` connection to configure monitoring on error rates.
+
 # 0.15.0 (Jun 18, 2026)
 * Upgraded capability scaffolding to reduce conflicts.
 * Used `aws_tags` from upgraded `data.ns_workspace`.

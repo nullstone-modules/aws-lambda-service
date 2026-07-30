@@ -35,3 +35,14 @@ The entrypoint defined in the code that AWS executes when running the lambda.
 See https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-features.html#gettingstarted-features-programmingmodel for runtime-specific instructions.
 EOF
 }
+
+variable "alert_thresholds" {
+  type = object({
+    error_rate = optional(number, 5)
+  })
+  default     = {}
+  description = <<EOF
+Thresholds for CloudWatch alarms on the lambda function. Only active when a notification connection is provided.
+- error_rate: Percentage of invocations that error over a 5-minute period to trigger the alarm (default: 5%)
+EOF
+}
