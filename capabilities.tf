@@ -22,21 +22,27 @@ locals {
   cap_env_prefixes = tomap({
     x = ""
   })
+  // cap_prefixes is a map indexed by capability name which points to the env_prefix in local.cap_modules
+  cap_prefixes = tomap({
+    x = ""
+  })
 
   capabilities = {
     env = [
       {
-        cap_tf_id = "x"
-        name      = ""
-        value     = ""
+        cap_tf_id  = "x"
+        capability = "x"
+        name       = "EXAMPLE_ENV"
+        value      = ""
       }
     ]
 
     secrets = [
       {
-        cap_tf_id = "x"
-        name      = ""
-        value     = sensitive("")
+        cap_tf_id  = "x"
+        capability = "x"
+        name       = "EXAMPLE_SECRET"
+        value      = sensitive("")
       }
     ]
 
@@ -45,8 +51,9 @@ locals {
     // They will be flattened into list(string) when we output from this module
     private_urls = [
       {
-        cap_tf_id = "x"
-        url       = "http://example"
+        cap_tf_id  = "x"
+        capability = "x"
+        url        = "http://example"
       }
     ]
 
@@ -55,15 +62,17 @@ locals {
     // They will be flattened into list(string) when we output from this module
     public_urls = [
       {
-        cap_tf_id = "x"
-        url       = "https://example.com"
+        cap_tf_id  = "x"
+        capability = "x"
+        url        = "https://example.com"
       }
     ]
 
     log_configurations = [
       {
-        cap_tf_id = "x"
-        logDriver = "awslogs"
+        cap_tf_id  = "x"
+        capability = "x"
+        logDriver  = "awslogs"
         options = {
           "awslogs-region"        = data.aws_region.this.region
           "awslogs-group"         = module.scaffold.log_group.name
@@ -74,7 +83,8 @@ locals {
 
     permissions = [
       {
-        cap_tf_id = "x"
+        cap_tf_id  = "x"
+        capability = "x"
 
         // required
         sid_prefix = ""
@@ -94,7 +104,8 @@ locals {
 
     event_sources = [
       {
-        cap_tf_id = "x"
+        cap_tf_id  = "x"
+        capability = "x"
 
         // required
         name       = "" // used to uniquely identify the event source
@@ -110,8 +121,9 @@ locals {
 
     dead_letter_queues = [
       {
-        cap_tf_id = "x"
-        queue_arn = ""
+        cap_tf_id  = "x"
+        capability = "x"
+        queue_arn  = ""
       }
     ]
 
@@ -120,10 +132,11 @@ locals {
     // See https://docs.nullstone.io/extending/metrics/aws-cloudwatch.html#metrics-mappings
     metrics = [
       {
-        cap_tf_id = "x"
-        name      = ""
-        type      = "usage|usage-percent|duration|generic"
-        unit      = ""
+        cap_tf_id  = "x"
+        capability = "x"
+        name       = ""
+        type       = "usage|usage-percent|duration|generic"
+        unit       = ""
 
         mappings = "{}"
       }
