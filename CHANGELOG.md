@@ -1,3 +1,7 @@
+# 0.18.0 (Oct 28, 2026)
+* Switched the log reader from an IAM User with static access keys to an IAM Role assumed by the Nullstone agent.
+* `log_reader` and `metrics_reader` outputs are no longer sensitive, so stack members below Architect can view logs and metrics.
+
 # 0.17.0 (Oct 2, 2026)
 * Upgraded `nullstone-io/ns` provider to `~> 0.13.0`.
 * Replaced `ns_env_variables` and `ns_secret_keys` with the layered `ns_env_layout`, `ns_env_values`, and `ns_env_platform_data` data sources to aggregate environment variables and secrets.
